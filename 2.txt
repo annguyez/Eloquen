@@ -1,0 +1,119 @@
+Expressions and statements
+
+Có 4 loại giá trị trong js: số, chuỗi, bool và ko xác định
+
+empty value có 2 loại ko xác định và null
+
+
+Hàm
+
+Để khởi tạo 1 hàm bằng đăt tên hàm và thân hàm luôn được bao bởi ngoặc nhọn
+vd: const sq = function(x){
+	return x*x;
+}
+
+và để sử dụng ta dùng sq();
+
+Phạm vi sử dụng biến
+let và const mang tính cục bộ, do đó nếu đưa ra ngoài vòng for hay if sẽ ko có tác dụng
+
+có 1 cách khác để khai báo hàm đó là 
+function square(x) {
+}
+
+arrow func
+cách thứ 3 để khai báo 1 func đó là sư dung ky hieu (=>), nó thường đứng sau cac tham sô và theo sau là nd của hàm
+lấy vd: 
+const power = (base, exponent) => {
+  let result = 1;
+  for (let count = 0; count < exponent; count++) {
+    result *= base;
+  }
+  return result;
+};
+
+
+và đối với 1 tham số 2 cách này đều cho kết quả giống như nhau
+
+const square1 = (x) => { return x * x; };
+
+const square2 = x => x * x;
+
+---
+ và khi sử dụng với không có tham số thì ta làm tương tự
+Recursion- đệ quy
+việc 1 hàm gọi lại chính nó liên tục sau khi thỏa mãn điều kiện cuối cùng thì dừng lại 
+ta xem vd
+function power(base, exponent) {
+  if (exponent == 0) {
+    return 1;
+  } else {
+    return base * power(base, exponent - 1);
+  }
+}
+
+console.log(power(2, 3)); -->8
+
+
+------------------------------
+
+Cấu trúc dữ liệu: đối tượng và mảng
+ 
+Data set:  khai báo tên mảng và các data nằm trong []
+vd let listOfNumbers = [2, 3, 5, 7, 11]; và để truy cậop chúng chỉ cần gọi tên hàm và ham[1]
+số index của phần cần trỏ đến bắt đầu từ 0
+
+Properties
+Có 2 cách để truy cập thuộc tính đó là value.x và value[x]
+
+Method
+Mọi chuỗi đều có thuộc tính touppercase và tolowercase
+
+ở đây ta ví dụ method push và pop:
+push = thêm dữ liệu vào cuối mảng
+pop = xóa dữ liệu phía trước dữ liệu cuối cùng và đưa ra kq
+
+--------------
+Object 
+
+Giá trị của obj là 1 tập hợp các thuộc tính tùy ý khác với arr chúng dùng ngoặc nhọn để khai báo 
+
+lâys vd let day1 = {
+  squirrel: false,
+  events: ["work", "touched tree", "pizza", "running"]
+};
+
+ ở đây ta kết hợp cả arr và obj với nhau
+
+để fetch dữ liệu trên obj 
+thật đơn giản 
+ta dùng console.log(day1.squirrel);
+// → false
+
+và đây là trường hợp khi ta lấy dữ liệu sai
+console.log(day1.wolf);
+// → undefined
+day1.wolf = false;
+console.log(day1.wolf);
+// → false
+
+
+------------
+
+
+object.assign có khả năng copy mọi thuộc tính từ 1 obj sang 1 obj khác
+vd
+
+let objectA = {a: 1, b: 2};
+Object.assign(objectA, {b: 3, c: 4});
+console.log(objectA);
+// → {a: 1, b: 3, c: 4}
+
+
+
+
+
+
+
+
+
