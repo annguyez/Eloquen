@@ -110,6 +110,318 @@ console.log(objectA);
 // → {a: 1, b: 3, c: 4}
 
 
+//Tính đột biến 
+ta có thê xem vd này để hiểu thêm
+
+let object1 = {value: 10};
+let object2 = object1;
+let object3 = {value: 10};
+
+console.log(object1 == object2);
+// → true
+console.log(object1 == object3);
+// → false
+
+object1.value = 15;
+console.log(object2.value);
+// → 15
+console.log(object3.value);
+// → 10
+
+Để chỉnh sửa 1 datatrong đối tượng ta sử dụng  
+const score = {visitors: 0, home: 0};
+// This is okay
+score.visitors = 1;
+
+điều này sẽ kông được
+/ This isn't allowed
+score = {visitors: 1, home: 1};
+
+------------
+
+1 vài đối tươnglj liên quan khác 
+tương tự với push và pop của mảng
+
+ở đây object sử dụng unshift và shift với tính năng tương tự
+
+ví dụ sau
+let todoList = [];
+function remember(task) {
+  todoList.push(task);
+}
+
+function getTask() {
+  return todoList.shift();
+}
+function rememberUrgently(task) {
+  todoList.unshift(task);
+}
+
+arr.push(num1, num2, ...);
+// Thêm một hoặc nhiều phần tử vào cuối mảng
+
+arr.unshift(num1, num2, ...);
+// Thêm một hoặc nhiều phần tử vào đầu mảng
+
+
+arr.shift();
+// Lấy ra phần tử đầu tiên của mảng
+delete arr[index]
+
+// Xoá giá trị của 1 phần tử ở key truyền vào và không làm thay đổi chiều dài của mảng
+
+arr.splice(index, n, num1, num2, ...)
+
+// Xóa n phần tử từ vị trí key truyền vào và chèn thêm num1, num2... vào vị trí đó
+/
+
+console.log([1, 2, 3, 2, 1].indexOf(2));
+// → 1
+console.log([1, 2, 3, 2, 1].lastIndexOf(2));
+// → 3
+console.log([0, 1, 2, 3, 4].slice(2, 4));
+// → [2, 3]
+console.log([0, 1, 2, 3, 4].slice(2));
+// → [2, 3, 4]
+function remove(array, index) {
+  return array.slice(0, index)
+    .concat(array.slice(index + 1));
+}
+console.log(remove(["a", "b", "c", "d", "e"], 2));
+// → ["a", "b", "d", "e"]
+trên đây đều là nhưng hàm mà js chuẩn bị sẵn để thao tác với mảng hay là đối tượng
+
+chuỗi và thuộc tính của chúng
+
+bạn có thể đọc thuộc tính như là length and touppercase nhưgn nếu b cố thử thêm mới 1 thuộc tính nó sẽ ko thể đượpc
+let kim = "Kim";
+kim.age = 88;
+console.log(kim.age);
+// → undefined
+
+string, number và Boolean không phải là các đối tượng 
+nhưung nó vẫn có thể sử dụng slide hay indexof
+
+console.log("coconuts".slice(4, 7));
+// → nut
+console.log("coconut".indexOf("u"));
+// → 5
+
+1 điều string có thể chưa nhiều kí tự tring khi mảng chỉ có 1 duy nhất
+
+console.log("one two three".indexOf("ee"));
+// → 11
+để loại bỏ khoảng trắng ta dùng trim();
+
+console.log("  okay \n ".trim());
+
+đây là ví dụ và split 
+
+let sentence = "Secretarybirds specialize in stomping";
+let words = sentence.split(" ");
+console.log(words);
+// → ["Secretarybirds", "specialize", "in", "stomping"]
+console.log(words.join(". "));
+// → Secretarybirds. specialize. in. stomping
+
+
+ta dụng ... để gọi lại obj trc đó
+
+let words = ["never", "fully"];
+console.log(["will", ...words, "understand"]);
+// → ["will", "never", "fully", "understand"]
+
+
+
+
+
+
+-----------------
+Higher-Order Functions mean chức năng bậc cao
+
+đây là 1 cách để quản lý vòng for
+
+function repeat(n, action) {
+  for (let i = 0; i < n; i++) {
+    action(i);
+  }
+}
+
+repeat(3, console.log);
+// → 0
+// → 1
+// → 2
+
+và từ đó ta sử dụng nó 1 cách dễ dàng hơn ví dụ như
+
+let labels = [];
+repeat(5, i => {
+  labels.push(`Unit ${i + 1}`);
+});
+console.log(labels);
+// → ["Unit 1", "Unit 2", "Unit 3", "Unit 4", "Unit 5"]
+
+trừ tượng hóa cho phép ta thực hiện hành đông, ko chỉ là giá trị nữa
+nó đến từ 
+function greaterThan(n) {
+  return m => m > n;
+}
+let greaterThan10 = greaterThan(10);
+console.log(greaterThan10(11));
+// → true
+có thể có chức năng thay đổi chức năng khác.
+
+function noisy(f) {
+  return (...args) => {
+    console.log("calling with", args);
+    let result = f(...args);
+    console.log("called with", args, ", returned", result);
+    return result;
+  };
+}
+noisy(Math.min)(3, 2, 1);
+// → calling with [3, 2, 1]
+// → called with [3, 2, 1] , returned 1
+
+
+thạm trí viết theo 1 luồng mới
+
+function unless(test, then) {
+  if (!test) then();
+}
+
+repeat(3, n => {
+  unless(n % 2 == 1, () => {
+    console.log(n, "is even");
+  });
+});
+// → 0 is even
+// → 2 is even
+Lọc mảng
+
+function filter(array, test) {
+  let passed = [];
+  for (let element of array) {
+    if (test(element)) {
+      passed.push(element);
+    }
+  }
+  return passed;
+}
+
+console.log(filter(SCRIPTS, script => script.living));
+// → [{name: "Adlam", …}, …]
+
+
+Map
+
+
+function map(array, transform) {
+  let mapped = [];
+  for (let element of array) {
+    mapped.push(transform(element));
+  }
+  return mapped;
+}
+
+let rtlScripts = SCRIPTS.filter(s => s.direction == "rtl");
+console.log(map(rtlScripts, s => s.name));
+// → ["Adlam", "Arabic", "Imperial Aramaic", …]
+
+giốgn như forÊach và filter map cũng là 1 dạng phương thức mảng
+
+
+Reversing an array
+Reduce
+
+
+function reduce(array, combine, start) {
+  let current = start;
+  for (let element of array) {
+    current = combine(current, element);
+  }
+  return current;
+}
+
+console.log(reduce([1, 2, 3, 4], (a, b) => a + b, 0));
+// → 10
+
+Functional programming là một mô hình lập trình trong đó giá trị đầu ra của hàm chỉ phụ thuộc vào
+ các đối số được truyền cho hàm đó
+
+
+map, filter và reduce , tất cả các chức năng khi đưa ra một danh sách ban đầu sau biến
+thành cái gì đó khác , nhưng vẫn giữ nguyên list gốc của nó .
+
+
+const son = [
+{id:1, name: "an"},
+{id:1, name: "an"},
+{id:1, name: "an"},
+{id:1, name: "an"},
+]
+sử dụng map
+
+const get = son.map(a=>{
+return son.name
+}
+);
+
+
+
+hay chỉnh sửa 
+
+const mapped = songs.map(song=>{
+	const {artist, ...rest} = song;
+return {
+	...rest,
+	scrobbleCount: 0,
+	sportUrl: 'let fix',
+}
+})
+Filter :Lọc 1 số item ra khỏi mảg ban đầu
+
+
+khá giống map
+
+cons ar = [1,2,3,4];
+const newar = ar.filter((value, index, array)=>{
+	return value % 2 ===0;
+}
+);
+ vd
+tìm kiếm chuối 
+
+const newar = ar.filter(ar=>{
+	return ar.include("str");
+});
+
+const newar = ar.filter(ar=>{
+	return ar.properties.include("str");
+});
+
+
+cuối cùng reduce :  nhận vào 1 mảng và tính toán thành một giá trị duy nhất
+
+
+giống map filter but kahcs đối số callback
+vd Tính toán tổng 1 mảng số nguyên
+
+
+const numbers = [2,3,4,5,6,7,8];
+const sum = numbers.reduces(
+(acc, currValue)=>{
+return acc + currValeu;
+},0);
+
+
+CT : const sum = myAr. reduce((acc, currenValue, curenInd, array)=>{
+
+//action
+
+	return acc + curenValue;
+},0);
+
 
 
 
