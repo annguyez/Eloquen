@@ -1,0 +1,122 @@
+Javascript có khả năng đóng gói
+
+Prototype là cơ chế kế thừa tính nưang từ obj khác. do js ko có class nên ta cần prototype
+vd: let protoRabbit = {
+  speak(line) {
+    console.log(`The ${this.type} rabbit says '${line}'`);
+  }
+};
+let killerRabbit = Object.create(protoRabbit);
+killerRabbit.type = "killer";
+killerRabbit.speak("SKREEEE!");
+// → The killer rabbit says 'SKREEEE!'
+
+Js có khả năng ghi đè
+vd: Rabbit.prototype.teeth = "small";
+console.log(killerRabbit.teeth);
+// → small
+killerRabbit.teeth = "long, sharp, and bloody";
+console.log(killerRabbit.teeth);
+// → long, sharp, and bloody
+console.log(blackRabbit.teeth);
+// → small
+console.log(Rabbit.prototype.teeth);
+// → small
+
+
+map : là một cấu trúc dữ liệu cho phép lưu trữ dữ liệu theo kiểu key-value, tương tự như object.
+
+tên của thuộc tính phải là string
+
+Tính đa hình trong js
+
+Symbol là một kiểu dữ liệu dạng primative data. Để tạo mới một Symbol, bạn có thể dùng phương thức Symbol(),
+
+Symbol không có hàm khởi tạo. nên không thể dùng từ khoá new để tạo mới
+
+instanceof : kiểm tra xem obj thuộc về đối tượng nào, có thừa kế
+
+vi du
+class Rabbit {}
+let rabbit = new Rabbit();
+
+// is it an object of Rabbit class?
+alert( rabbit instanceof Rabbit ); // true
+
+typeof trả về kiểm dữ liệu của obj
+console.log(typeof 42);
+// expected output: "number"
+
+Use strict: là đc khai báo thì các dòng code phíadưới sẽ đc uản lý ngặt hơn
+
+Exeption: khi 1 chức năng ko thể hđ bt đc, thì nó sẽ dừng việc đang lmà và ngay lập tức chuyển tới 1 nơi xử lý vấn đề lỗi đó
+vd : 
+function promptDirection(question) {
+  let result = prompt(question);
+  if (result.toLowerCase() == "left") return "L";
+  if (result.toLowerCase() == "right") return "R";
+  throw new Error("Invalid direction: " + result);
+}
+
+function look() {
+  if (promptDirection("Which way?") == "L") {
+    return "a house";
+  } else {
+    return "two angry bears";
+  }
+}
+
+try {
+  console.log("You see", look());
+} catch (error) {
+  console.log("Something went wrong: " + error);
+}
+
+
+for(;;) là hàm cố tình tạo ra 1 vòng lặp ko có kết khi gặp lỗi thì dừng lại
+
+
+Biểu thức chính quy : là 1 kiểu đối tượng nó bao quanh bơi ký huiêu (/)
+
+và test bằng cách 
+
+console.log(/abc/.test("abcde"));
+// → true
+console.log(/abc/.test("abxde"));
+// → false
+
+//test có phải số nhị phân ko
+
+let t = /[^01]/;
+console.log(t.test("10101010"));
+//true
+console.log(t.test("10104561010"));
+//false
+
+các biểu thức chính quy mẫu
+
+/abc/	A sequence of characters
+/[abc]/	Any character from a set of characters
+/[^abc]/	Any character not in a set of characters
+/[0-9]/	Any character in a range of characters
+/x+/	One or more occurrences of the pattern x
+/x+?/	One or more occurrences, nongreedy
+/x*/	Zero or more occurrences
+/x?/	Zero or one occurrence
+/x{2,4}/	Two to four occurrences
+/(abc)/	A group
+/a|b|c/	Any one of several patterns
+/\d/	Any digit character
+/\w/	An alphanumeric character (“word character”)
+/\s/	Any whitespace character
+/./	Any character except newlines
+/\b/	A word boundary
+/^/	Start of input
+/$/	End of input
+
+
+
+
+
+
+
